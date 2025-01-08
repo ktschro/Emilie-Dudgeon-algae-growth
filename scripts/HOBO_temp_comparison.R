@@ -167,7 +167,7 @@ compare_all <- rbind(hobo_compare_long,hobo_summary_daily)
 compare_all %>% 
   mutate(label2 = ifelse(planned=="planned", as.character(treatment_name),NA_character_)) %>%
   filter(temp_var!="sd_temp") %>%
-  ggplot(aes(x=planned,y=temp,color=planned)) +
+  ggplot(aes(x=planned,y=temp,color=temp_type)) +
   geom_point() +
   geom_line(aes(group=treatment_name)) +
   facet_wrap(~temp_var,scale="free_y",nrow=1) +
@@ -175,6 +175,7 @@ compare_all %>%
                    nudge_x = 1,
                    na.rm = TRUE) +
   theme_classic()
+ggsave("plots/exploratory/HOBO_compare_min_max_mean_range.png",width=15,height=5,units="in",dpi=600)
 
 #just mean and temp_range
 compare_all %>% 
@@ -188,5 +189,6 @@ compare_all %>%
                    nudge_x = 1,
                    na.rm = TRUE) +
   theme_classic()
+ggsave("plots/exploratory/HOBO_compare_mean_range.png",width=10,height=5,units="in",dpi=600)
 
 
